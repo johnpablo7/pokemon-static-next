@@ -24,7 +24,7 @@ export const Layout: FC<Props> = ({ children, title }) => {
 
       <main
         style={{
-          padding: "0 20px",
+          padding: "0px 20px",
         }}
       >
         {children}

@@ -1,32 +1,32 @@
 import { NextPage, GetStaticProps } from "next";
+import { Grid } from "@nextui-org/react";
+
 import { pokeApi } from "../api";
 import { Layout } from "../components/layouts";
 import { PokemonListResponse, SmallPokemon } from "../interfaces";
+import { PokemonCard } from "../components/pokemon";
 
 interface Props {
   pokemons: SmallPokemon[];
 }
 
 const HomePage: NextPage<Props> = ({ pokemons }) => {
-  console.log(pokemons);
+  // console.log(pokemons);
 
   return (
     <Layout title="Listado de Pokémons">
-      <ul>
-        {pokemons.map(({ id, name }) => (
-          <li key={id}>
-            #{id} - {name}
-          </li>
+      <Grid.Container gap={2} justify="flex-start">
+        {pokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
-      </ul>
+      </Grid.Container>
     </Layout>
   );
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  // const { data } = await  // your fetch function here
+  // su función de búsqueda aquí
   const { data } = await pokeApi.get<PokemonListResponse>("/pokemon?limit=151");
-
   // console.log(data);
   const pokemons: SmallPokemon[] = data.results.map((poke, i) => ({
     ...poke,
@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   return {
     props: {
-      pokemons: pokemons,
+      pokemons,
     },
   };
 };

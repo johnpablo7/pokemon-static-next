@@ -12,16 +12,14 @@ export const Layout: FC<Props> = ({ children, title }) => {
     <>
       <Head>
         <title>{title || "Pokemon App"}</title>
-        <meta name="author" content="John Pablo" />
+        <meta name="author" content="John Davis Pablo Valverde" />
         <meta
           name="description"
           content={`Información sobre el pokemón ${title}`}
         />
         <meta name="keywords" content={`${title}, pokemón, pokedex`} />
       </Head>
-
       <Navbar />
-
       <main
         style={{
           padding: "0px 20px",
